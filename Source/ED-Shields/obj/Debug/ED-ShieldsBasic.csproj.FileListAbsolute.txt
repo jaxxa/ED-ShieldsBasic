@@ -1,0 +1,3 @@
+C:\~Git\Jaxxa-Rimworld\~SubModules\ED-ShieldsBasic\ED-ShieldsBasic\Assemblies\ED-ShieldsBasic.dll
+C:\~Git\Jaxxa-Rimworld\~SubModules\ED-ShieldsBasic\Source\ED-Shields\obj\Debug\ED-ShieldsBasic.csprojResolveAssemblyReference.cache
+C:\~Git\Jaxxa-Rimworld\~SubModules\ED-ShieldsBasic\Source\ED-Shields\obj\Debug\ED-ShieldsBasic.dll
