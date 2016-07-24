@@ -168,18 +168,10 @@ namespace EnhancedDevelopment.Shields.Basic
 
         #region Initilisation
 
-        //Dummy override
-        //This is called before Spawn Setup.
-        public override void PostMake()
-        {
-            base.PostMake();
-            //Log.Message("PM");
-        }
+        //Constructor
 
-        //On spawn, get the power component reference
-        public override void SpawnSetup()
+        static Building_Shield()
         {
-            //Log.Message("SS");
             //Setup UI
             UI_DIRECT_OFF = ContentFinder<Texture2D>.Get("UI/DirectOff", true);
             UI_DIRECT_ON = ContentFinder<Texture2D>.Get("UI/DirectOn", true);
@@ -195,6 +187,20 @@ namespace EnhancedDevelopment.Shields.Basic
 
             UI_SHOW_ON = ContentFinder<Texture2D>.Get("UI/ShieldShowOn", true);
             UI_SHOW_OFF = ContentFinder<Texture2D>.Get("UI/ShieldShowOff", true);
+        }
+
+        //Dummy override
+        //This is called before Spawn Setup.
+        public override void PostMake()
+        {
+            base.PostMake();
+            //Log.Message("PM");
+        }
+
+        //On spawn, get the power component reference
+        public override void SpawnSetup()
+        {
+            //Log.Message("SS");
 
             base.SpawnSetup();
             this.m_Power = base.GetComp<CompPowerTrader>();
