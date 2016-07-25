@@ -1,4 +1,4 @@
-# ED-Shields
+# ED-ShieldsBasic
 A mod for the Game Rimworld
 
 
@@ -7,10 +7,7 @@ This mod allows you to place shield generators. They are expensive and power hun
 #Change Log
 
 01.00.00
-*Initial Release
+*Initial Release -A14
 
 01.00.01
-*Fix for Shields blocking not just from the edge.
-
-01.00.02
-*Fix for Fully charged shields not losing Strength when Power is lost.
+*Fix for potentially not loading Graphical Resources on loading a saved game.
