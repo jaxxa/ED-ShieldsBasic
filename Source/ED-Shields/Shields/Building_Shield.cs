@@ -205,31 +205,33 @@ namespace EnhancedDevelopment.Shields.Basic
             base.SpawnSetup();
             this.m_Power = base.GetComp<CompPowerTrader>();
 
-            if (def is ShieldBuildingThingDef)
+            Comp_ShieldBuilding _CompShield = this.GetComp<Comp_ShieldBuilding>();
+            //_CompShield.props
+            if (_CompShield.props is CompProperties_ShieldBuilding)
             {
                 //Read in variables from the custom MyThingDef
-                m_FieldIntegrity_Max = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_FieldIntegrity_Max;
-                m_FieldIntegrity_Initial = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_FieldIntegrity_Initial;
-                m_Field_Radius = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_Field_Radius;
+                m_FieldIntegrity_Max = ((CompProperties_ShieldBuilding)_CompShield.props).m_FieldIntegrity_Max;
+                m_FieldIntegrity_Initial = ((CompProperties_ShieldBuilding)_CompShield.props).m_FieldIntegrity_Initial;
+                m_Field_Radius = ((CompProperties_ShieldBuilding)_CompShield.props).m_Field_Radius;
 
-                m_PowerRequired_Charging = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_PowerRequiredCharging;
-                m_PowerRequired_Sustaining = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_PowerRequiredSustaining;
+                m_PowerRequired_Charging = ((CompProperties_ShieldBuilding)_CompShield.props).m_PowerRequiredCharging;
+                m_PowerRequired_Sustaining = ((CompProperties_ShieldBuilding)_CompShield.props).m_PowerRequiredSustaining;
 
-                m_RechargeTickDelayInterval = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_RechargeTickDelayInterval;
-                m_RecoverWarmupDelayTicks = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_RecoverWarmupDelayTicks;
+                m_RechargeTickDelayInterval = ((CompProperties_ShieldBuilding)_CompShield.props).m_RechargeTickDelayInterval;
+                m_RecoverWarmupDelayTicks = ((CompProperties_ShieldBuilding)_CompShield.props).m_RecoverWarmupDelayTicks;
 
-                m_BlockIndirect_Avalable = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_BlockIndirect_Avalable;
-                m_BlockDirect_Avalable = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_BlockDirect_Avalable;
-                m_FireSupression_Avalable = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_FireSupression_Avalable;
-                m_InterceptDropPod_Avalable = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_InterceptDropPod_Avalable;
+                m_BlockIndirect_Avalable = ((CompProperties_ShieldBuilding)_CompShield.props).m_BlockIndirect_Avalable;
+                m_BlockDirect_Avalable = ((CompProperties_ShieldBuilding)_CompShield.props).m_BlockDirect_Avalable;
+                m_FireSupression_Avalable = ((CompProperties_ShieldBuilding)_CompShield.props).m_FireSupression_Avalable;
+                m_InterceptDropPod_Avalable = ((CompProperties_ShieldBuilding)_CompShield.props).m_InterceptDropPod_Avalable;
 
-                m_StructuralIntegrityMode = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_StructuralIntegrityMode;
+                m_StructuralIntegrityMode = ((CompProperties_ShieldBuilding)_CompShield.props).m_StructuralIntegrityMode;
 
-                m_ColourRed = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_ColourRed;
-                m_ColourGreen = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_ColourGreen;
-                m_ColourBlue = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).m_ColourBlue;
+                m_ColourRed = ((CompProperties_ShieldBuilding)_CompShield.props).m_ColourRed;
+                m_ColourGreen = ((CompProperties_ShieldBuilding)_CompShield.props).m_ColourGreen;
+                m_ColourBlue = ((CompProperties_ShieldBuilding)_CompShield.props).m_ColourBlue;
 
-                m_SIFBuildings = ((EnhancedDevelopment.Shields.Basic.ShieldBuildingThingDef)def).SIFBuildings;
+                m_SIFBuildings = ((CompProperties_ShieldBuilding)_CompShield.props).SIFBuildings;
                 //Log.Error("Count:" + SIFBuildings.Count);
             }
             else
@@ -540,7 +542,7 @@ namespace EnhancedDevelopment.Shields.Basic
                             {
 
                                 //On hit effects
-                                MoteThrower.ThrowLightningGlow(pr.ExactPosition, 0.5f);
+                                MoteMaker.ThrowLightningGlow(pr.ExactPosition, 0.5f);
                                 //On hit sound
                                 HitSoundDef.PlayOneShot(pr.Position);
 
