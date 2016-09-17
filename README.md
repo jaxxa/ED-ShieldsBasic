@@ -15,3 +15,6 @@ This mod allows you to place shield generators. They are expensive and power hun
 02.00.00
 *Update to Alpha 15
 *Change to using Comps instead of Custom C# thingDefs, partially due to https://ludeon.com/forums/index.php?topic=25249
+
+02.00.01
+* Modifying Building_Shield.CurrentStatus, IsActive and CheckPowerOn.

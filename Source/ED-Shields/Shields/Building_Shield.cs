@@ -98,7 +98,7 @@ namespace EnhancedDevelopment.Shields.Basic
 
         #region Properties
 
-        enumShieldStatus CurrentStatus
+        public enumShieldStatus CurrentStatus
         {
             get
             {
@@ -267,7 +267,7 @@ namespace EnhancedDevelopment.Shields.Basic
             this.TickRecharge();
         }
 
-        private bool IsActive()
+        public bool IsActive()
         {
             //return true;
             return (this.CurrentStatus == enumShieldStatus.ActiveCharging ||
@@ -275,7 +275,7 @@ namespace EnhancedDevelopment.Shields.Basic
                  this.CurrentStatus == enumShieldStatus.ActiveSustaining);
         }
 
-        private bool CheckPowerOn()
+        public bool CheckPowerOn()
         {
             if (this.m_Power != null)
             {
