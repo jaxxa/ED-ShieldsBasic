@@ -18,3 +18,6 @@ This mod allows you to place shield generators. They are expensive and power hun
 
 02.00.01
 * Modifying Building_Shield.CurrentStatus, IsActive and CheckPowerOn.
+
+03.00.00
+*Update to Alpha 16

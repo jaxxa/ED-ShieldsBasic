@@ -198,11 +198,11 @@ namespace EnhancedDevelopment.Shields.Basic
         }
 
         //On spawn, get the power component reference
-        public override void SpawnSetup()
+        public override void SpawnSetup(Map map)
         {
             //Log.Message("SS");
 
-            base.SpawnSetup();
+            base.SpawnSetup(map);
             this.m_Power = base.GetComp<CompPowerTrader>();
 
             Comp_ShieldBuilding _CompShield = this.GetComp<Comp_ShieldBuilding>();
@@ -422,7 +422,7 @@ namespace EnhancedDevelopment.Shields.Basic
                 foreach (IntVec3 _Square in _AllSquares)
                 {
                     // Log.Message("Testing:" + _Square.ToString());
-                    List<Thing> _Things = Find.ThingGrid.ThingsListAt(_Square);
+                    List<Thing> _Things = this.Map.thingGrid.ThingsListAt(_Square);
 
                     for (int i = 0, l = _Things.Count(); i < l; i++)
                     {
@@ -466,11 +466,11 @@ namespace EnhancedDevelopment.Shields.Basic
         virtual public void ProtectSquare(IntVec3 square)
         {
             //Ignore squares outside the map
-            if (!square.InBounds())
+            if (!square.InBounds(this.Map))
             {
                 return;
             }
-            List<Thing> things = Find.ThingGrid.ThingsListAt(square);
+            List<Thing> things = this.Map.thingGrid.ThingsListAt(square);
             List<Thing> thingsToDestroy = new List<Thing>();
             Boolean _IFFCheck = this.m_StructuralIntegrityMode;
 
@@ -542,9 +542,9 @@ namespace EnhancedDevelopment.Shields.Basic
                             {
 
                                 //On hit effects
-                                MoteMaker.ThrowLightningGlow(pr.ExactPosition, 0.5f);
+                                MoteMaker.ThrowLightningGlow(pr.ExactPosition, this.Map, 0.5f);
                                 //On hit sound
-                                HitSoundDef.PlayOneShot(pr.Position);
+                                HitSoundDef.PlayOneShot((SoundInfo)new TargetInfo(this.Position, this.Map, false));
 
                                 //Damage the shield
                                 ProcessDamage(pr.def.projectile.damageAmountBase);
@@ -626,7 +626,7 @@ namespace EnhancedDevelopment.Shields.Basic
         {
             if (this.m_InterceptDropPod_Avalable && this.m_InterceptDropPod_Active)
             {
-                IEnumerable<Thing> dropPods = Find.ListerThings.ThingsOfDef(ThingDefOf.DropPod);
+                IEnumerable<Thing> dropPods = this.Map.listerThings.ThingsOfDef(ThingDefOf.ActiveDropPod);
 
                 if (dropPods != null)
                 {
@@ -635,11 +635,11 @@ namespace EnhancedDevelopment.Shields.Basic
 
                     IEnumerable<Thing> closeFires = dropPods.Where<Thing>(t => t.Position.InHorDistOf(this.Position, this.m_Field_Radius));
 
-                    foreach (RimWorld.DropPod currentDropPod in closeFires.ToList())
+                    foreach (RimWorld.ActiveDropPod currentDropPod in closeFires.ToList())
                     {
                         //currentDropPod.Destroy();
 
-                        GenExplosion.DoExplosion(currentDropPod.Position, 1, DamageDefOf.Bomb, currentDropPod);
+                        GenExplosion.DoExplosion(currentDropPod.Position, this.Map, 1, DamageDefOf.Bomb, currentDropPod);
 
                         currentDropPod.Destroy(DestroyMode.Vanish);
 
@@ -663,7 +663,7 @@ namespace EnhancedDevelopment.Shields.Basic
             if (this.m_FireSupression_Avalable && this.m_FireSupression_Active && (this.m_TickCount % FIRE_SUPRESSION_TICK_DELAY == 0))
             //if (this.m_FireSupression_Avalable && this.m_FireSupression_Active)
             {
-                IEnumerable<Thing> fires = Find.ListerThings.ThingsOfDef(ThingDefOf.Fire);
+                IEnumerable<Thing> fires = this.Map.listerThings.ThingsOfDef(ThingDefOf.Fire);
 
                 if (fires != null)
                 {
@@ -679,7 +679,7 @@ namespace EnhancedDevelopment.Shields.Basic
                                 //Damage the shield
                                 ProcessDamage(DAMAGE_FROM_FIRE);
 
-                                currentFire.TakeDamage(new DamageInfo(DamageDefOf.Extinguish, DAMAGE_TO_FIRE, this));
+                                currentFire.TakeDamage(new DamageInfo(DamageDefOf.Extinguish, DAMAGE_TO_FIRE, -1, this));
                             }
                         }
                     }
@@ -692,7 +692,7 @@ namespace EnhancedDevelopment.Shields.Basic
             if (this.m_FireSupression_Avalable && this.m_FireSupression_Active && (this.m_TickCount % FIRE_SUPRESSION_TICK_DELAY == 0))
             //if (this.m_FireSupression_Avalable && this.m_FireSupression_Active)
             {
-                IEnumerable<Thing> things = Find.ThingGrid.ThingsAt(position);
+                IEnumerable<Thing> things = this.Map.thingGrid.ThingsAt(position);
                 List<Thing> fires = new List<Thing>();
 
                 foreach (Thing currentThing in things)
@@ -710,7 +710,7 @@ namespace EnhancedDevelopment.Shields.Basic
                         //Damage the shield
                         ProcessDamage(DAMAGE_FROM_FIRE);
 
-                        currentFire.TakeDamage(new DamageInfo(DamageDefOf.Extinguish, DAMAGE_TO_FIRE, this));
+                        currentFire.TakeDamage(new DamageInfo(DamageDefOf.Extinguish, DAMAGE_TO_FIRE, -1, this));
                     }
                 }
             }
@@ -720,7 +720,7 @@ namespace EnhancedDevelopment.Shields.Basic
         {
             if (this.m_RepairMode_Active)
             {
-                List<Thing> things = Find.ThingGrid.ThingsListAt(position);
+                List<Thing> things = this.Map.thingGrid.ThingsListAt(position);
 
                 foreach (Thing thing in things)
                 {
@@ -837,7 +837,7 @@ namespace EnhancedDevelopment.Shields.Basic
             else if (this.CurrentStatus == enumShieldStatus.Initilising)
             {
                 //stringBuilder.AppendLine("Initiating shield: " + ((warmupTicks * 100) / recoverWarmup) + "%");
-                stringBuilder.AppendLine("Ready in " + Math.Round(GenDate.TicksToSeconds(m_WarmupTicksRemaining)) + " seconds.");
+                stringBuilder.AppendLine("Ready in " + Math.Round(GenTicks.TicksToSeconds(m_WarmupTicksRemaining)) + " seconds.");
                 //stringBuilder.AppendLine("Ready in " + m_warmupTicksCurrent + " seconds.");
             }
             else
