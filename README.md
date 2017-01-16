@@ -21,3 +21,6 @@ This mod allows you to place shield generators. They are expensive and power hun
 
 03.00.00
 *Update to Alpha 16
+
+03.00.01
+*Converting WorkToMake to WorkToBuild
