@@ -35,7 +35,8 @@
 		</statBases>
 		<costList>
 			<Steel>100</Steel>
-			<Silver>500</Silver>
+			<Silver>100</Silver>
+			<Component>15</Component>
 		</costList>
 		<passability>Impassable</passability>
 		<selectable>true</selectable>
@@ -104,8 +105,9 @@
 		<uiIconPath>Things/ShieldBuilding_Small_Blue</uiIconPath>
 		<passability>Standable</passability>
 		<costList>
-			<Steel>100</Steel>
-			<Silver>200</Silver>
+			<Steel>75</Steel>
+			<Silver>50</Silver>
+			<Component>8</Component>
 		</costList>
 		<comps>
 			<li Class="CompProperties_Power">
@@ -186,7 +188,8 @@
 		</comps>
 		<costList>
 			<Steel>200</Steel>
-			<Silver>600</Silver>
+			<Silver>100</Silver>
+			<Component>20</Component>
 		</costList>
 
 		<size>(2,2)</size>
