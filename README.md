@@ -1,4 +1,8 @@
 # ED-ShieldsBasic
+
+# As of Alpha 17 ShieldsBasic is now a branch of the main shields mod.
+
+
 A mod for the Game Rimworld
 
 
